@@ -526,8 +526,16 @@ async def get_observations(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     else:  # chinese
         observations_text = observations or '无'
     
+    # BOTÃO FINAL CORRIGIDO - AGORA É "SEND ORDER" ou equivalente
+    if language == 'english':
+        button_text = "🚀 SEND ORDER"
+    elif language == 'portugues':
+        button_text = "🚀 ENVIAR PEDIDO"
+    else:  # chinese
+        button_text = "🚀 发送订单"
+    
     keyboard = [[
-        InlineKeyboardButton("✅ CONFIRM ORDER", callback_data="confirm_order")
+        InlineKeyboardButton(button_text, callback_data="confirm_order")
     ]]
     
     await update.message.reply_text(
@@ -542,7 +550,7 @@ async def get_observations(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     return CONFIRMATION
 
 async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Confirma pedido - TODAS AS MENSAGENS NO GRUPO SERÃO EM PORTUGUÊS."""
+    """Confirma pedido - AGORA MOSTRA A MENSAGEM CORRETA."""
     query = update.callback_query
     await query.answer()
     
