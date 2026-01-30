@@ -28,15 +28,13 @@ logger = logging.getLogger(__name__)
 
 # ========== CONFIGURAÇÕES DO BOT ==========
 BOT_USERNAME = "@Rick_shoppbot"  # SEU BOT CORRETO
-TOKEN = os.getenv('TOKEN')
+
+# TOKEN DO SEU BOT - JÁ INSERIDO!
+TOKEN = os.getenv('TOKEN', '8252613179:AAFbdap-56zMBw4glJk_MBj7bnEWk3F1Ido')
 ORDER_GROUP_ID = os.getenv('ORDER_GROUP_ID', '-1003565140066')
 
-if not TOKEN:
-    logger.error("❌ TOKEN não configurado!")
-    logger.error("Configure a variável TOKEN no Railway")
-    exit(1)
-
 logger.info(f"✅ Bot {BOT_USERNAME} iniciando...")
+logger.info(f"✅ Token configurado")
 logger.info(f"✅ Grupo: {ORDER_GROUP_ID}")
 
 # ========== ESTADOS ==========
@@ -110,13 +108,42 @@ Escolha um serviço:""",
 💬 Descreva sua necessidade:"""
         },
         
-        'need_personalized': "📝 *Descreva detalhadamente o que precisa:*",
+        'need_personalized': """📝 *SERVIÇO PERSONALIZADO*
+
+Descreva detalhadamente o que precisa:
+
+• Tipo de serviço específico
+• Quantidade/volume necessário
+• Prazo desejado
+• Orçamento disponível
+
+💰 *Condições:*
+• 60% pagamento antecipado
+• 40% na conclusão do serviço
+• Apenas USDT TRC20""",
+        
         'ask_telegram': "📲 *Informe seu @ do Telegram (ex: @seunome):*",
-        'ask_observations': "📌 *Observações adicionais (opcional):*",
-        'confirmation': f"✅ *Pedido confirmado!* Entraremos em contato via {BOT_USERNAME} em 24h.",
+        
+        'ask_observations': """📌 *OBSERVAÇÕES ADICIONAIS*
+
+Alguma informação extra? (opcional)
+• Especificações técnicas
+• Prazo urgente
+• Formato desejado
+• Outras necessidades""",
+        
+        'confirmation': f"""✅ *PEDIDO CONFIRMADO!*
+
+📞 Nossa equipe entrará em contato via {BOT_USERNAME} em até 24h.
+
+💰 *INSTRUÇÕES DE PAGAMENTO:*
+• Token: USDT (TRC20)
+• Rede: TRON
+• Confirme sempre o endereço da carteira""",
+        
         'error': f"❌ Erro. Use /start no {BOT_USERNAME} para recomeçar.",
         'cancel': "❌ Operação cancelada.",
-        'invalid_username': "❌ @ inválido. Deve ser como @seunome"
+        'invalid_username': "❌ @ inválido. Deve começar com @ (ex: @seunome)"
     },
     
     'english': {
@@ -178,13 +205,42 @@ Choose a service:""",
 💬 Describe your need:"""
         },
         
-        'need_personalized': "📝 *Describe in detail what you need:*",
+        'need_personalized': """📝 *PERSONALIZED SERVICE*
+
+Describe in detail what you need:
+
+• Specific service type
+• Quantity/volume needed
+• Desired deadline
+• Available budget
+
+💰 *Conditions:*
+• 60% payment upfront
+• 40% upon service completion
+• Only USDT TRC20""",
+        
         'ask_telegram': "📲 *Provide your Telegram @ (ex: @yourname):*",
-        'ask_observations': "📌 *Additional observations (optional):*",
-        'confirmation': f"✅ *Order confirmed!* We'll contact via {BOT_USERNAME} within 24h.",
+        
+        'ask_observations': """📌 *ADDITIONAL OBSERVATIONS*
+
+Any extra information? (optional)
+• Technical specifications
+• Urgent deadline
+• Desired format
+• Other requirements""",
+        
+        'confirmation': f"""✅ *ORDER CONFIRMED!*
+
+📞 Our team will contact via {BOT_USERNAME} within 24h.
+
+💰 *PAYMENT INSTRUCTIONS:*
+• Token: USDT (TRC20)
+• Network: TRON
+• Always confirm wallet address""",
+        
         'error': f"❌ Error. Use /start on {BOT_USERNAME} to restart.",
         'cancel': "❌ Operation cancelled.",
-        'invalid_username': "❌ Invalid @. Must be like @username"
+        'invalid_username': "❌ Invalid @. Must start with @ (ex: @username)"
     }
 }
 
@@ -192,11 +248,11 @@ Choose a service:""",
 SERVICES = {
     1: {'key': 'phone_lists', 'name_pt': '📋 Listas Telefônicas', 'name_en': '📋 Phone Lists'},
     2: {'key': 'sms_numbers', 'name_pt': '📞 Números SMS', 'name_en': '📞 SMS Numbers'},
-    3: {'key': 'instagram_accounts', 'name_pt': '📱 Contas Instagram', 'name_en': '📱 Instagram'},
+    3: {'key': 'instagram_accounts', 'name_pt': '📱 Contas Instagram', 'name_en': '📱 Instagram Accounts'},
     4: {'key': 'tiktok_likes', 'name_pt': '👍 Curtidas TikTok', 'name_en': '👍 TikTok Likes'},
     5: {'key': 'profile_setup', 'name_pt': '🎨 Perfil Profissional', 'name_en': '🎨 Profile Setup'},
     6: {'key': 'data_panel', 'name_pt': '🔍 Painel de Dados', 'name_en': '🔍 Data Panel'},
-    7: {'key': 'international_lists', 'name_pt': '🌍 Listas Internacionais', 'name_en': '🌍 International'},
+    7: {'key': 'international_lists', 'name_pt': '🌍 Listas Internacionais', 'name_en': '🌍 International Lists'},
     8: {'key': 'business_ideas', 'name_pt': '💡 Ideias Empresa', 'name_en': '💡 Business Ideas'},
     9: {'key': 'personalized', 'name_pt': '🛠️ Personalizado', 'name_en': '🛠️ Personalized'},
 }
@@ -241,10 +297,8 @@ async def choose_language(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             ))
         keyboard.append(row)
     
-    keyboard.append([InlineKeyboardButton(
-        "❌ Cancel" if language == 'english' else "❌ Cancelar", 
-        callback_data="cancel"
-    )])
+    cancel_text = "❌ Cancel" if language == 'english' else "❌ Cancelar"
+    keyboard.append([InlineKeyboardButton(cancel_text, callback_data="cancel")])
     
     await query.edit_message_text(
         text=TEXTS[language]['main_menu'],
@@ -348,50 +402,15 @@ async def process_observations(update: Update, context: ContextTypes.DEFAULT_TYP
     if user_data[user_id].get('personalized_description'):
         service_name = f"{service_name}: {user_data[user_id]['personalized_description']}"
     
-    confirmation_text = f"""✅ *ORDER CONFIRMED!* ✅
-
-📋 *Summary:*
-• Service: {service_name}
-• Telegram: @{telegram_username}
-• Observations: {observations}
-
-📞 *Next Steps:*
-1. Our team will contact within 24h
-2. Payment instructions will be sent
-3. Delivery after confirmation
-
-💰 *Payment: USDT TRC20 only*
-⚡ *Fast delivery guaranteed*
-
-🛡️ *RICK SHOP - PREMIUM QUALITY!*"""
+    confirmation_text = TEXTS[language]['confirmation']
+    
+    confirm_text = "✅ Confirm Order" if language == 'english' else "✅ Confirmar Pedido"
+    cancel_text = "❌ Cancel" if language == 'english' else "❌ Cancelar"
     
     keyboard = [
-        [InlineKeyboardButton("✅ Confirm Order", callback_data="confirm_order")],
-        [InlineKeyboardButton("❌ Cancel", callback_data="cancel")]
+        [InlineKeyboardButton(confirm_text, callback_data="confirm_order")],
+        [InlineKeyboardButton(cancel_text, callback_data="cancel")]
     ]
-    
-    if language == 'portugues':
-        confirmation_text = f"""✅ *PEDIDO CONFIRMADO!* ✅
-
-📋 *Resumo:*
-• Serviço: {service_name}
-• Telegram: @{telegram_username}
-• Observações: {observations}
-
-📞 *Próximos Passos:*
-1. Nossa equipe entrará em contato em 24h
-2. Instruções de pagamento serão enviadas
-3. Entrega após confirmação
-
-💰 *Pagamento: Apenas USDT TRC20*
-⚡ *Entrega rápida garantida*
-
-🛡️ *RICK SHOP - QUALIDADE PREMIUM!*"""
-        
-        keyboard = [
-            [InlineKeyboardButton("✅ Confirmar Pedido", callback_data="confirm_order")],
-            [InlineKeyboardButton("❌ Cancelar", callback_data="cancel")]
-        ]
     
     await update.message.reply_text(
         text=confirmation_text,
@@ -408,7 +427,7 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
     user_info = user_data.get(user_id, {})
     
     if not user_info:
-        await query.edit_message_text(f"❌ Data lost. Use /start on {BOT_USERNAME}")
+        await query.edit_message_text(f"❌ Dados perdidos. Use /start no {BOT_USERNAME}")
         return ConversationHandler.END
     
     language = user_info.get('language', 'portugues')
@@ -450,12 +469,15 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
 {'✍️ *DESCRIÇÃO PERSONALIZADA:*' if order_data['personalized_desc'] else ''}
 {order_data['personalized_desc'] if order_data['personalized_desc'] else ''}
 
-💰 *PAGAMENTO:*
-• Normal: 100% antecipado
-• Personalizado: 60% + 40%
-• Moeda: USDT TRC20
+💰 *CONDIÇÕES DE PAGAMENTO:*
+• Serviços normais: 100% antecipado
+• Serviços personalizados: 60% antecipado + 40% conclusão
+• Moeda: Apenas USDT TRC20
 
-🚨 *CONTATAR: @{order_data['telegram_username']} EM 24H!*"""
+🚨 *AÇÃO REQUERIDA:*
+Entrar em contato com @{order_data['telegram_username']} em até 24 horas!
+
+⚡ *Via bot: {BOT_USERNAME}*"""
     
     try:
         # Enviar para grupo
@@ -471,43 +493,49 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         if language == 'portugues':
             final_message = f"""✅ *PEDIDO REGISTRADO COM SUCESSO!*
 
-📬 Enviado para nossa equipe no grupo privado.
-📞 Entraremos em contato via {order_data['telegram_username']} em até 24h.
+📬 Seu pedido foi enviado para nossa equipe administrativa.
+📞 Nossa equipe entrará em contato através do {order_data['telegram_username']} em até 24 horas.
 
 💰 *INSTRUÇÕES DE PAGAMENTO:*
 • Token: USDT (TRC20)
 • Rede: TRON (TRC20)
-• Valor: Informado pelo atendente
+• Valor: Será informado pelo atendente
 • Prazo: Pagamento antecipado
 
-⚠️ *ATENÇÃO:*
-• Não aceitamos outros métodos
+⚠️ *ATENÇÃO IMPORTANTE:*
+• Não aceitamos outros métodos de pagamento
 • Confirme sempre o endereço da carteira
-• Aguarde confirmação antes de enviar
+• Aguarde confirmação antes de enviar qualquer valor
+• Todos os pagamentos são em crypto USDT TRC20
 
-💎 *RICK SHOP - QUALIDADE E CONFIABILIDADE!*
+💎 *RICK SHOP - QUALIDADE E CONFIABILIDADE GARANTIDA!*
 
-🛡️ *Para novo pedido, acesse: {BOT_USERNAME}*"""
+🛡️ *Para fazer um novo pedido, acesse: {BOT_USERNAME}*
+
+⚡ *Tempo de resposta: menos de 24 horas*"""
         else:
             final_message = f"""✅ *ORDER SUCCESSFULLY REGISTERED!*
 
-📬 Sent to our team in private group.
-📞 We'll contact via {order_data['telegram_username']} within 24h.
+📬 Your order has been sent to our administrative team.
+📞 Our team will contact you through {order_data['telegram_username']} within 24 hours.
 
 💰 *PAYMENT INSTRUCTIONS:*
 • Token: USDT (TRC20)
 • Network: TRON (TRC20)
-• Amount: Provided by support
+• Amount: Will be informed by support
 • Deadline: Upfront payment
 
-⚠️ *ATTENTION:*
-• We don't accept other methods
-• Always confirm wallet address
-• Wait for confirmation before sending
+⚠️ *IMPORTANT ATTENTION:*
+• We don't accept other payment methods
+• Always confirm the wallet address
+• Wait for confirmation before sending any amount
+• All payments are in crypto USDT TRC20
 
-💎 *RICK SHOP - QUALITY AND RELIABILITY!*
+💎 *RICK SHOP - GUARANTEED QUALITY AND RELIABILITY!*
 
-🛡️ *For new order, visit: {BOT_USERNAME}*"""
+🛡️ *To make a new order, visit: {BOT_USERNAME}*
+
+⚡ *Response time: less than 24 hours*"""
         
         await query.edit_message_text(
             text=final_message,
@@ -516,9 +544,35 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         
     except Exception as e:
         logger.error(f"❌ Erro ao enviar para grupo: {e}")
-        error_msg = f"✅ Order received!\n\nTechnical error: {str(e)[:100]}...\n\nOur team will be notified."
+        
         if language == 'portugues':
-            error_msg = f"✅ Pedido recebido!\n\nErro técnico: {str(e)[:100]}...\n\nNossa equipe será notificada."
+            error_msg = f"""✅ Pedido recebido com sucesso!
+
+📬 Seu pedido foi registrado em nosso sistema.
+📞 Nossa equipe será notificada e entrará em contato em breve.
+
+⚠️ *Erro técnico:* O sistema de notificação automática apresentou uma falha, mas seu pedido está seguro.
+
+💰 *Pagamento:* Apenas USDT TRC20
+⚡ *Entrega:* Rápida e segura
+
+💎 *Rick Shop - Sua confiança é nossa prioridade!*
+
+Para acompanhamento: {BOT_USERNAME}"""
+        else:
+            error_msg = f"""✅ Order successfully received!
+
+📬 Your order has been registered in our system.
+📞 Our team will be notified and will contact you soon.
+
+⚠️ *Technical error:* The automatic notification system had a failure, but your order is safe.
+
+💰 *Payment:* Only USDT TRC20
+⚡ *Delivery:* Fast and secure
+
+💎 *Rick Shop - Your trust is our priority!*
+
+For follow-up: {BOT_USERNAME}"""
         
         await query.edit_message_text(
             text=error_msg,
@@ -550,10 +604,8 @@ async def back_to_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
             ))
         keyboard.append(row)
     
-    keyboard.append([InlineKeyboardButton(
-        "❌ Cancel" if language == 'english' else "❌ Cancelar", 
-        callback_data="cancel"
-    )])
+    cancel_text = "❌ Cancel" if language == 'english' else "❌ Cancelar"
+    keyboard.append([InlineKeyboardButton(cancel_text, callback_data="cancel")])
     
     await query.edit_message_text(
         text=TEXTS[language]['main_menu'],
@@ -573,7 +625,8 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if user_id in user_data:
         del user_data[user_id]
     
-    message = f"❌ Operation cancelled. Use /start on {BOT_USERNAME} to restart."
+    message = f"❌ Operação cancelada. Use /start no {BOT_USERNAME} para recomeçar."
+    
     if update.callback_query:
         await query.edit_message_text(message)
     else:
@@ -582,109 +635,132 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.error(f"Erro no bot: {context.error}")
+    logger.error(f"Erro no bot {BOT_USERNAME}: {context.error}")
 
 # ========== COMANDOS ADICIONAIS ==========
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Comando /help"""
     help_text = f"""🤖 *COMANDOS DISPONÍVEIS {BOT_USERNAME}:*
     
-/start - Iniciar o bot
+/start - Iniciar o bot e fazer pedido
 /help - Ver esta mensagem de ajuda
-/services - Lista de serviços
-/contact - Falar com suporte
+/services - Ver lista completa de serviços
+/contact - Informações de contato
 
-🏪 *RICK SHOP - QUALIDADE PREMIUM!*
-💳 Pagamentos em USDT TRC20 apenas"""
+🏪 *RICK SHOP - ESPECIALISTA EM MATERIAIS PREMIUM*
+💳 Pagamentos em USDT TRC20 apenas
+⚡ Entrega rápida e segura
+⏰ Suporte 24/7"""
     
     await update.message.reply_text(help_text, parse_mode='Markdown')
 
 async def services_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Comando /services"""
-    services_text = f"""🛒 *SERVIÇOS {BOT_USERNAME}:*
+    services_text = f"""🛒 *SERVIÇOS DISPONÍVEIS {BOT_USERNAME}:*
 
-• 📋 Listas Telefônicas Brasileiras
-• 📞 Números para SMS/Redes Sociais
-• 📱 Contas de Instagram
-• 👍 Curtidas e Visualizações TikTok
-• 🎨 Montagem de Perfil Profissional
-• 🔍 Painel de Dados Brasileiros
-• 🌍 Listas Internacionais
-• 💡 Ideias para Empresa
-• 🛠️ Serviços Personalizados
+• 📋 *Listas Telefônicas Brasileiras* - Dados completos
+• 📞 *Números para SMS/Redes Sociais* - WhatsApp, Telegram, Tinder
+• 📱 *Contas de Instagram* - Brasileiras e internacionais
+• 👍 *Curtidas e Visualizações TikTok* - Aumento de engajamento
+• 🎨 *Montagem de Perfil Profissional* - Instagram corporativo
+• 🔍 *Painel de Dados Brasileiros* - Assinatura mensal
+• 🌍 *Listas Internacionais* - Dados de diversos países
+• 💡 *Ideias para Empresa* - Projetos completos
+• 🛠️ *Serviços Personalizados* - Soluções sob medida
 
-💰 *Pagamento:* USDT TRC20 apenas
-⚡ *Entrega:* Rápida e Segura
-⏰ *Suporte:* 24/7"""
+💰 *CONDIÇÕES COMERCIAIS:*
+• Pagamento: Apenas USDT TRC20
+• Entrega: Rápida conforme serviço
+• Qualidade: Premium garantida
+• Suporte: 24 horas por dia
+
+⚡ *Para fazer pedido:* Use /start no {BOT_USERNAME}"""
     
     await update.message.reply_text(services_text, parse_mode='Markdown')
 
 async def contact_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Comando /contact"""
-    contact_text = f"""📞 *CONTATO E SUPORTE {BOT_USERNAME}:*
+    contact_text = f"""📞 *INFORMAÇÕES DE CONTATO {BOT_USERNAME}:*
 
-• Bot: {BOT_USERNAME}
-• ⏰ Horário: 24/7
-• ⚡ Resposta: Até 24h
-• 💰 Pagamento: Apenas USDT TRC20
+🤖 *Bot Oficial:* {BOT_USERNAME}
+⏰ *Horário de Atendimento:* 24 horas por dia, 7 dias por semana
+⚡ *Tempo de Resposta:* Até 24 horas para pedidos
+💰 *Forma de Pagamento:* Exclusivamente USDT TRC20
 
-💬 *Para pedidos:* Use /start no bot
-🔧 *Problemas técnicos:* Verifique conexão
+📋 *PARA FAZER PEDIDOS:*
+1. Acesse {BOT_USERNAME}
+2. Use o comando /start
+3. Siga o fluxo de pedido
+4. Aguarde contato da equipe
 
-🏪 *RICK SHOP - SEU PARCEIRO EM MATERIAIS PREMIUM!*"""
+🔧 *PROBLEMAS TÉCNICOS:*
+• Verifique sua conexão com a internet
+• Certifique-se de estar usando a versão mais recente do Telegram
+• Se o problema persistir, tente reiniciar o Telegram
+
+🏪 *RICK SHOP - SEU PARCEIRO EM MATERIAIS PREMIUM PARA TRABALHO BRASILEIRO E INTERNACIONAL!*
+
+💎 *Qualidade garantida | Entrega rápida | Suporte especializado*"""
     
     await update.message.reply_text(contact_text, parse_mode='Markdown')
 
 # ========== MAIN ==========
 def main() -> None:
     """Executa o bot."""
-    application = Application.builder().token(TOKEN).build()
-    
-    conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('start', start)],
-        states={
-            States.CHOOSING_LANGUAGE: [
-                CallbackQueryHandler(choose_language, pattern='^lang_')
-            ],
-            States.MAIN_MENU: [
-                CallbackQueryHandler(choose_service, pattern='^service_'),
-                CallbackQueryHandler(cancel, pattern='^cancel$')
-            ],
-            States.CHOOSING_SERVICE: [
-                CallbackQueryHandler(proceed_service, pattern='^proceed$'),
-                CallbackQueryHandler(back_to_menu, pattern='^back_to_menu$')
-            ],
-            States.PERSONALIZED_SERVICE: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, personalized_service)
-            ],
-            States.TELEGRAM_USERNAME: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, process_telegram_username)
-            ],
-            States.OBSERVATIONS: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, process_observations)
-            ],
-            States.CONFIRMATION: [
-                CallbackQueryHandler(confirm_order, pattern='^confirm_order$'),
-                CallbackQueryHandler(cancel, pattern='^cancel$')
-            ],
-        },
-        fallbacks=[CommandHandler('cancel', cancel)],
-        allow_reentry=True
-    )
-    
-    application.add_handler(conv_handler)
-    
-    # Adicionar comandos extras
-    application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("services", services_command))
-    application.add_handler(CommandHandler("contact", contact_command))
-    
-    application.add_error_handler(error_handler)
-    
-    logger.info(f"✅ Bot {BOT_USERNAME} iniciado com sucesso!")
-    logger.info("🟢 Aguardando mensagens...")
-    
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    try:
+        application = Application.builder().token(TOKEN).build()
+        
+        conv_handler = ConversationHandler(
+            entry_points=[CommandHandler('start', start)],
+            states={
+                States.CHOOSING_LANGUAGE: [
+                    CallbackQueryHandler(choose_language, pattern='^lang_')
+                ],
+                States.MAIN_MENU: [
+                    CallbackQueryHandler(choose_service, pattern='^service_'),
+                    CallbackQueryHandler(cancel, pattern='^cancel$')
+                ],
+                States.CHOOSING_SERVICE: [
+                    CallbackQueryHandler(proceed_service, pattern='^proceed$'),
+                    CallbackQueryHandler(back_to_menu, pattern='^back_to_menu$')
+                ],
+                States.PERSONALIZED_SERVICE: [
+                    MessageHandler(filters.TEXT & ~filters.COMMAND, personalized_service)
+                ],
+                States.TELEGRAM_USERNAME: [
+                    MessageHandler(filters.TEXT & ~filters.COMMAND, process_telegram_username)
+                ],
+                States.OBSERVATIONS: [
+                    MessageHandler(filters.TEXT & ~filters.COMMAND, process_observations)
+                ],
+                States.CONFIRMATION: [
+                    CallbackQueryHandler(confirm_order, pattern='^confirm_order$'),
+                    CallbackQueryHandler(cancel, pattern='^cancel$')
+                ],
+            },
+            fallbacks=[CommandHandler('cancel', cancel)],
+            allow_reentry=True
+        )
+        
+        application.add_handler(conv_handler)
+        
+        # Adicionar comandos extras
+        application.add_handler(CommandHandler("help", help_command))
+        application.add_handler(CommandHandler("services", services_command))
+        application.add_handler(CommandHandler("contact", contact_command))
+        
+        application.add_error_handler(error_handler)
+        
+        logger.info(f"✅ Bot {BOT_USERNAME} iniciado com sucesso!")
+        logger.info(f"✅ Token: {TOKEN[:15]}...")
+        logger.info(f"✅ Grupo de pedidos: {ORDER_GROUP_ID}")
+        logger.info("🟢 Aguardando mensagens...")
+        
+        application.run_polling(allowed_updates=Update.ALL_TYPES)
+        
+    except Exception as e:
+        logger.error(f"❌ Erro fatal no bot {BOT_USERNAME}: {e}")
+        raise
 
 if __name__ == '__main__':
     main()
