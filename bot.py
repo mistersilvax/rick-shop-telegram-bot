@@ -807,15 +807,8 @@ def main():
     webhook_url = f"{WEBHOOK_URL}/{TOKEN}"
     logger.info(f"🔗 Webhook URL: {webhook_url}")
     
-    # Configurar webhook - AGORA COMPLETO E CORRETO
+    # Configurar webhook
     app.run_webhook(
         listen="0.0.0.0",
         port=PORT,
-        url_path=TOKEN,
-        webhook_url=webhook_url,
-        drop_pending_updates=True,
-        secret_token='RICK_SHOP_BOT_SECRET'
-    )
-
-if __name__ == '__main__':
-    main()
+        url_path=
