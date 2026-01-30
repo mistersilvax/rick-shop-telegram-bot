@@ -194,8 +194,45 @@ Para novo pedido: {bot_username}""",
     }
 }
 
-# ========== SERVIÇOS ==========
+# ========== SERVIÇOS (NOMES MAIS CURTOS PARA CABER NOS BOTÕES) ==========
 SERVICES = {
+    'english': {
+        1: "📋 Phone Lists",
+        2: "📞 SMS Numbers", 
+        3: "📱 Instagram",
+        4: "👍 TikTok",
+        5: "🎨 Profile Setup",
+        6: "🔍 Data Panel",
+        7: "🌍 Intl Lists",
+        8: "💡 Business Ideas",
+        9: "🛠️ Custom"
+    },
+    'portugues': {
+        1: "📋 Listas Tel.",
+        2: "📞 Números SMS",
+        3: "📱 Instagram",
+        4: "👍 TikTok",
+        5: "🎨 Perfil Prof.",
+        6: "🔍 Painel Dados",
+        7: "🌍 Listas Intl.",
+        8: "💡 Ideias Empresa",
+        9: "🛠️ Personalizado"
+    },
+    'chinese': {
+        1: "📋 电话列表",
+        2: "📞 短信号码", 
+        3: "📱 Instagram",
+        4: "👍 TikTok",
+        5: "🎨 专业资料",
+        6: "🔍 数据面板",
+        7: "🌍 国际列表",
+        8: "💡 商业想法",
+        9: "🛠️ 定制服务"
+    }
+}
+
+# NOMES COMPLETOS PARA EXIBIÇÃO NAS PÁGINAS DE SERVIÇO
+SERVICE_FULL_NAMES = {
     'english': {
         1: "📋 Brazilian Phone Lists",
         2: "📞 Numbers for SMS/Social Media", 
@@ -406,27 +443,23 @@ async def choose_language(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     
     texts = TEXTS[language]
     
-    # Menu principal com serviços
+    # Menu principal com serviços - BOTÕES MAIS CURTOS
     services = SERVICES[language]
     
     keyboard = [
         [
             InlineKeyboardButton(services[1], callback_data="service_1"),
-            InlineKeyboardButton(services[2], callback_data="service_2")
+            InlineKeyboardButton(services[2], callback_data="service_2"),
+            InlineKeyboardButton(services[3], callback_data="service_3")
         ],
         [
-            InlineKeyboardButton(services[3], callback_data="service_3"),
-            InlineKeyboardButton(services[4], callback_data="service_4")
-        ],
-        [
+            InlineKeyboardButton(services[4], callback_data="service_4"),
             InlineKeyboardButton(services[5], callback_data="service_5"),
             InlineKeyboardButton(services[6], callback_data="service_6")
         ],
         [
             InlineKeyboardButton(services[7], callback_data="service_7"),
-            InlineKeyboardButton(services[8], callback_data="service_8")
-        ],
-        [
+            InlineKeyboardButton(services[8], callback_data="service_8"),
             InlineKeyboardButton(services[9], callback_data="service_9")
         ],
         [InlineKeyboardButton("❌ Cancel", callback_data="cancel")]
@@ -448,10 +481,11 @@ async def choose_service(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     service_num = int(query.data.replace('service_', ''))
     language = user_data[user_id]['language']
     
-    user_data[user_id]['service'] = SERVICES[language][service_num]
+    # Usar o nome COMPLETO para armazenar
+    user_data[user_id]['service'] = SERVICE_FULL_NAMES[language][service_num]
     user_data[user_id]['service_num'] = service_num
     
-    service_text = SERVICES[language][service_num]
+    service_text = SERVICE_FULL_NAMES[language][service_num]
     price_text = PRICES[language][service_num]
     
     keyboard = [[
@@ -526,7 +560,7 @@ async def get_observations(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     else:  # chinese
         observations_text = observations or '无'
     
-    # BOTÃO FINAL CORRIGIDO - AGORA É "SEND ORDER" ou equivalente
+    # BOTÃO FINAL - TEXTOS MAIS CLAROS
     if language == 'english':
         button_text = "🚀 SEND ORDER"
     elif language == 'portugues':
@@ -637,21 +671,17 @@ async def back_to_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     keyboard = [
         [
             InlineKeyboardButton(services[1], callback_data="service_1"),
-            InlineKeyboardButton(services[2], callback_data="service_2")
+            InlineKeyboardButton(services[2], callback_data="service_2"),
+            InlineKeyboardButton(services[3], callback_data="service_3")
         ],
         [
-            InlineKeyboardButton(services[3], callback_data="service_3"),
-            InlineKeyboardButton(services[4], callback_data="service_4")
-        ],
-        [
+            InlineKeyboardButton(services[4], callback_data="service_4"),
             InlineKeyboardButton(services[5], callback_data="service_5"),
             InlineKeyboardButton(services[6], callback_data="service_6")
         ],
         [
             InlineKeyboardButton(services[7], callback_data="service_7"),
-            InlineKeyboardButton(services[8], callback_data="service_8")
-        ],
-        [
+            InlineKeyboardButton(services[8], callback_data="service_8"),
             InlineKeyboardButton(services[9], callback_data="service_9")
         ],
         [InlineKeyboardButton("❌ Cancel", callback_data="cancel")]
