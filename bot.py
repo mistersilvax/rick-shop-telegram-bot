@@ -5,7 +5,10 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes, ConversationHandler
 
 # ========== CONFIGURAÇÃO ==========
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
 logger = logging.getLogger(__name__)
 
 # ========== CONFIGURAÇÕES DO BOT ==========
@@ -44,7 +47,7 @@ Choose a service:
 💰 *Payment:* USDT TRC20 only
 ⚡ *Delivery:* Fast after payment
 🛡️ *Quality:* Premium guaranteed""",
-        'order_confirmed': """✅ *ORDER SENT SUCCESSFULLY!*
+        'order_sent': """✅ *ORDER SENT SUCCESSFULLY!*
 
 📬 Your order has been sent to our team.
 📞 We will contact you via {telegram_username} within 24 hours.
@@ -59,15 +62,6 @@ Choose a service:
 🛡️ *RICK SHOP - PREMIUM QUALITY*
 
 For a new order: {bot_username}""",
-        'order_received': """✅ *ORDER RECEIVED!*
-
-📬 Registered in our system.
-📞 Our team has been notified.
-
-💰 Payment: USDT TRC20 only
-⚡ Delivery: Fast
-
-For follow-up: {bot_username}""",
         'cancelled': f"❌ Cancelled. Use /start on {BOT_USERNAME}",
         'invalid_username': "❌ Invalid @. Must start with @. Ex: @yourname",
         'services_list': """🛒 *RICK SHOP SERVICES:*
@@ -84,22 +78,7 @@ For follow-up: {bot_username}""",
 
 💰 Payment: USDT TRC20 only""",
         'help': f"🤖 *{BOT_USERNAME}*\n\n/start - Make an order\n/help - Help\n/services - View services\n\n🏪 Rick Shop - Premium Quality",
-        'custom_service': "📝 *DESCRIBE YOUR CUSTOM SERVICE:*\n\nWhat do you need? Detail:\n• Service type\n• Quantity/volume\n• Deadline\n• Budget\n\n💰 *Conditions:* 60% upfront, 40% upon completion",
-        'order_sent': """✅ *ORDER SENT SUCCESSFULLY!*
-
-📬 Your order has been sent to our team.
-📞 We will contact you via {telegram_username} within 24 hours.
-
-💰 *PAYMENT:*
-• Token: USDT (TRC20)
-• Network: TRON
-• Amount: Informed by our staff
-
-⚠️ *Only USDT TRC20 accepted!*
-
-🛡️ *RICK SHOP - PREMIUM QUALITY*
-
-For a new order: {bot_username}"""
+        'custom_service': "📝 *DESCRIBE YOUR CUSTOM SERVICE:*\n\nWhat do you need? Detail:\n• Service type\n• Quantity/volume\n• Deadline\n• Budget\n\n💰 *Conditions:* 60% upfront, 40% upon completion"
     },
     'portugues': {
         'welcome': f"🌐 *BEM-VINDO AO {BOT_USERNAME}*\n\nEscolha seu idioma:",
@@ -124,7 +103,7 @@ Escolha um serviço:
 💰 *Pagamento:* Apenas USDT TRC20
 ⚡ *Entrega:* Rápida após pagamento
 🛡️ *Qualidade:* Premium garantida""",
-        'order_confirmed': """✅ *PEDIDO ENVIADO COM SUCESSO!*
+        'order_sent': """✅ *PEDIDO ENVIADO COM SUCESSO!*
 
 📬 Seu pedido foi enviado para nossa equipe.
 📞 Entraremos em contato via {telegram_username} em até 24h.
@@ -139,15 +118,6 @@ Escolha um serviço:
 🛡️ *RICK SHOP - QUALIDADE PREMIUM*
 
 Para novo pedido: {bot_username}""",
-        'order_received': """✅ *PEDIDO RECEBIDO!*
-
-📬 Registrado em nosso sistema.
-📞 Nossa equipe foi notificada.
-
-💰 Pagamento: Apenas USDT TRC20
-⚡ Entrega: Rápida
-
-Para acompanhamento: {bot_username}""",
         'cancelled': f"❌ Cancelado. Use /start no {BOT_USERNAME}",
         'invalid_username': "❌ @ inválido. Deve começar com @. Ex: @seunome",
         'services_list': """🛒 *SERVIÇOS RICK SHOP:*
@@ -164,22 +134,7 @@ Para acompanhamento: {bot_username}""",
 
 💰 Pagamento: Apenas USDT TRC20""",
         'help': f"🤖 *{BOT_USERNAME}*\n\n/start - Fazer pedido\n/help - Ajuda\n/services - Ver serviços\n\n🏪 Rick Shop - Qualidade Premium",
-        'custom_service': "📝 *DESCREVA SEU SERVIÇO PERSONALIZADO:*\n\nO que você precisa? Detalhe:\n• Tipo de serviço\n• Quantidade/volume\n• Prazo\n• Orçamento\n\n💰 *Condições:* 60% antecipado, 40% conclusão",
-        'order_sent': """✅ *PEDIDO ENVIADO COM SUCESSO!*
-
-📬 Seu pedido foi enviado para nossa equipe.
-📞 Entraremos em contato via {telegram_username} em até 24h.
-
-💰 *PAGAMENTO:*
-• Token: USDT (TRC20)
-• Rede: TRON
-• Valor: Informado pelo atendente
-
-⚠️ *Apenas USDT TRC20 aceito!*
-
-🛡️ *RICK SHOP - QUALIDADE PREMIUM*
-
-Para novo pedido: {bot_username}"""
+        'custom_service': "📝 *DESCREVA SEU SERVIÇO PERSONALIZADO:*\n\nO que você precisa? Detalhe:\n• Tipo de serviço\n• Quantidade/volume\n• Prazo\n• Orçamento\n\n💰 *Condições:* 60% antecipado, 40% conclusão"
     },
     'chinese': {
         'welcome': f"🌐 *欢迎来到 {BOT_USERNAME}*\n\n选择您的语言:",
@@ -204,7 +159,7 @@ Para novo pedido: {bot_username}"""
 💰 *付款:* 仅限 USDT TRC20
 ⚡ *交付:* 付款后快速
 🛡️ *质量:* 优质保证""",
-        'order_confirmed': """✅ *订单发送成功!*
+        'order_sent': """✅ *订单发送成功!*
 
 📬 您的订单已发送给我们的团队。
 📞 我们将在24小时内通过 {telegram_username} 联系您。
@@ -219,15 +174,6 @@ Para novo pedido: {bot_username}"""
 🛡️ *RICK SHOP - 优质品质*
 
 新订单: {bot_username}""",
-        'order_received': """✅ *订单已收到!*
-
-📬 已注册到我们的系统。
-📞 我们的团队已收到通知。
-
-💰 付款: 仅限 USDT TRC20
-⚡ 交付: 快速
-
-跟进: {bot_username}""",
         'cancelled': f"❌ 已取消。使用 /start 在 {BOT_USERNAME}",
         'invalid_username': "❌ 无效的 @。必须以 @ 开头。例如: @您的名字",
         'services_list': """🛒 *RICK SHOP 服务:*
@@ -244,22 +190,7 @@ Para novo pedido: {bot_username}"""
 
 💰 付款: 仅限 USDT TRC20""",
         'help': f"🤖 *{BOT_USERNAME}*\n\n/start - 下订单\n/help - 帮助\n/services - 查看服务\n\n🏪 Rick Shop - 优质品质",
-        'custom_service': "📝 *描述您的定制服务:*\n\n您需要什么? 详细说明:\n• 服务类型\n• 数量/容量\n• 截止日期\n• 预算\n\n💰 *条件:* 60% 预付款, 40% 完成时付款",
-        'order_sent': """✅ *订单发送成功!*
-
-📬 您的订单已发送给我们的团队。
-📞 我们将在24小时内通过 {telegram_username} 联系您。
-
-💰 *付款:*
-• 代币: USDT (TRC20)
-• 网络: TRON
-• 金额: 由客服告知
-
-⚠️ *仅接受 USDT TRC20!*
-
-🛡️ *RICK SHOP - 优质品质*
-
-新订单: {bot_username}"""
+        'custom_service': "📝 *描述您的定制服务:*\n\n您需要什么? 详细说明:\n• 服务类型\n• 数量/容量\n• 截止日期\n• 预算\n\n💰 *条件:* 60% 预付款, 40% 完成时付款"
     }
 }
 
@@ -523,8 +454,6 @@ async def choose_service(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     service_text = SERVICES[language][service_num]
     price_text = PRICES[language][service_num]
     
-    texts = TEXTS[language]
-    
     keyboard = [[
         InlineKeyboardButton("✅ Select", callback_data="select_service"),
         InlineKeyboardButton("🔙 Back", callback_data="back")
@@ -613,7 +542,7 @@ async def get_observations(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     return CONFIRMATION
 
 async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Confirma pedido."""
+    """Confirma pedido - TODAS AS MENSAGENS NO GRUPO SERÃO EM PORTUGUÊS."""
     query = update.callback_query
     await query.answer()
     
@@ -627,26 +556,35 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
     language = user_info.get('language', 'english')
     texts = TEXTS[language]
     
-    # Enviar para grupo
+    # Enviar para grupo - SEMPRE EM PORTUGUÊS
     try:
-        # Definir texto para observações vazias no grupo
-        if language == 'english':
-            obs_text = user_info.get('observations', 'None')
-        elif language == 'portugues':
-            obs_text = user_info.get('observations', 'Nenhuma')
-        else:  # chinese
-            obs_text = user_info.get('observations', '无')
+        # Traduzir informações para português para o grupo
+        service = user_info.get('service', 'N/A')
+        observations = user_info.get('observations', '')
         
-        group_message = f"""📋 *NEW ORDER - RICK SHOP*
+        # Se o cliente usou outro idioma, mostramos a tradução também
+        if language != 'portugues':
+            # Adicionamos uma nota sobre o idioma original
+            lang_note = f" (Idioma original: {language})"
+        else:
+            lang_note = ""
+        
+        # Processar observações
+        if observations:
+            obs_text = f"{observations}{lang_note}"
+        else:
+            obs_text = f"Nenhuma{lang_note}"
+        
+        # MENSAGEM PARA O GRUPO - SEMPRE EM PORTUGUÊS
+        group_message = f"""📋 *NOVO PEDIDO - RICK SHOP*
 
-👤 *Customer:*
+👤 *Cliente:*
 • Telegram: {user_info.get('telegram_username', 'N/A')}
-• Service: {user_info.get('service', 'N/A')}
-• Observations: {obs_text}
-• Language: {language.upper()}
-• Date: {datetime.now().strftime("%d/%m/%Y %H:%M")}
+• Serviço: {service}
+• Observações: {obs_text}
+• Data: {datetime.now().strftime("%d/%m/%Y %H:%M")}
 
-🚨 *CONTACT WITHIN 24H!*"""
+🚨 *ENTRAR EM CONTATO EM 24H!*"""
         
         await context.bot.send_message(
             chat_id=ORDER_GROUP_ID,
@@ -654,27 +592,23 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
             parse_mode='Markdown'
         )
         
-        logger.info(f"✅ Order sent to group {ORDER_GROUP_ID}")
-        
-        # Mensagem final para cliente - CORRIGIDA AQUI
-        await query.edit_message_text(
-            texts['order_sent'].format(
-                telegram_username=user_info.get('telegram_username', ''),
-                bot_username=BOT_USERNAME
-            ),
-            parse_mode='Markdown'
-        )
+        logger.info(f"✅ Pedido enviado para grupo {ORDER_GROUP_ID}")
         
     except Exception as e:
-        logger.error(f"❌ Error sending to group: {e}")
-        # Se falhar ao enviar para o grupo, ainda mostrar mensagem ao cliente
-        await query.edit_message_text(
-            texts['order_sent'].format(
-                telegram_username=user_info.get('telegram_username', ''),
-                bot_username=BOT_USERNAME
-            ),
-            parse_mode='Markdown'
-        )
+        logger.error(f"❌ Erro ao enviar para grupo: {e}")
+        # Mesmo se falhar ao enviar para o grupo, mostramos a mensagem para o cliente
+    
+    # MENSAGEM PARA O CLIENTE - NO IDIOMA ESCOLHIDO POR ELE
+    final_message = texts['order_sent'].format(
+        telegram_username=user_info.get('telegram_username', 'you' if language == 'english' else 'você' if language == 'portugues' else '您'),
+        bot_username=BOT_USERNAME
+    )
+    
+    # Editar a mensagem atual com a mensagem final
+    await query.edit_message_text(
+        final_message,
+        parse_mode='Markdown'
+    )
     
     # Limpar dados
     if user_id in user_data:
@@ -793,15 +727,15 @@ def main():
     app.add_handler(CommandHandler("help", help_cmd))
     app.add_handler(CommandHandler("services", services_cmd))
     
-    logger.info(f"✅ Bot {BOT_USERNAME} STARTING...")
+    logger.info(f"✅ Bot {BOT_USERNAME} INICIANDO...")
     logger.info(f"✅ Token: {TOKEN[:10]}...")
     
     # ========== CONFIGURAR WEBHOOK ==========
     PORT = int(os.environ.get('PORT', 8080))
     WEBHOOK_URL = "https://rick-shop-telegram-bot-production.up.railway.app"
     
-    logger.info(f"🌐 Configuring webhook for: {WEBHOOK_URL}")
-    logger.info(f"🔧 Port: {PORT}")
+    logger.info(f"🌐 Configurando webhook para: {WEBHOOK_URL}")
+    logger.info(f"🔧 Porta: {PORT}")
     
     # URL completa do webhook
     webhook_url = f"{WEBHOOK_URL}/{TOKEN}"
