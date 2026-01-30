@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 TOKEN = "8252613179:AAFbdap-56zMBw4glJk_MBj7bnEWk3F1Ido"
 ORDER_GROUP_ID = "-1003565140066"
 BOT_USERNAME = "@Rick_shoppbot"
-WEBHOOK_URL = "https://rick-shop-telegram-bot-production.up.railway.app"  # SEU DOMÍNIO!
 
 # ========== ESTADOS ==========
 CHOOSING_LANGUAGE, MAIN_MENU, CHOOSING_SERVICE, TELEGRAM_USERNAME, OBSERVATIONS, CONFIRMATION = range(6)
@@ -348,9 +347,9 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     
     return ConversationHandler.END
 
-# ========== MAIN COM WEBHOOK ==========
+# ========== MAIN COM WEBHOOK CORRIGIDO ==========
 def main():
-    """Função principal - usa WEBHOOK."""
+    """Função principal - usa WEBHOOK com pacote correto."""
     app = Application.builder().token(TOKEN).build()
     
     # Configurar conversation handler
@@ -370,7 +369,8 @@ def main():
             OBSERVATIONS: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_observations)],
             CONFIRMATION: [CallbackQueryHandler(confirm_order, pattern='^confirm_order$')]
         },
-        fallbacks=[CommandHandler('cancel', cancel)]
+        fallbacks=[CommandHandler('cancel', cancel)],
+        per_message=False  # Adicionado para evitar warning
     )
     
     app.add_handler(conv_handler)
@@ -387,20 +387,26 @@ def main():
     
     logger.info(f"✅ Bot {BOT_USERNAME} INICIANDO...")
     logger.info(f"✅ Token: {TOKEN[:10]}...")
-    logger.info(f"✅ Domínio: {WEBHOOK_URL}")
     
     # ========== CONFIGURAR WEBHOOK ==========
-    PORT = 8080
+    PORT = int(os.environ.get('PORT', 8080))
+    WEBHOOK_URL = "https://rick-shop-telegram-bot-production.up.railway.app"
     
     logger.info(f"🌐 Configurando webhook para: {WEBHOOK_URL}")
+    logger.info(f"🔧 Porta: {PORT}")
+    
+    # URL completa do webhook
+    webhook_url = f"{WEBHOOK_URL}/{TOKEN}"
+    logger.info(f"🔗 Webhook URL: {webhook_url}")
     
     # Configurar webhook
     app.run_webhook(
         listen="0.0.0.0",
         port=PORT,
         url_path=TOKEN,
-        webhook_url=f"{WEBHOOK_URL}/{TOKEN}",
-        drop_pending_updates=True
+        webhook_url=webhook_url,
+        drop_pending_updates=True,
+        secret_token='RICK_SHOP_BOT_SECRET'
     )
 
 if __name__ == '__main__':
