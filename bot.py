@@ -44,15 +44,15 @@ Choose a service:
 💰 *Payment:* USDT TRC20 only
 ⚡ *Delivery:* Fast after payment
 🛡️ *Quality:* Premium guaranteed""",
-        'order_confirmed': """✅ *ORDER SENT SUCCESSFULLY!*
+        'order_confirmed': """✅ *ORDER CONFIRMED SUCCESSFULLY!*
 
 📬 Your order has been sent to our team.
 📞 We will contact you via {telegram_username} within 24 hours.
 
-💰 *PAYMENT INSTRUCTIONS:*
+💰 *PAYMENT:*
 • Token: USDT (TRC20)
-• Network: TRON network
-• Amount: Will be informed by our team
+• Network: TRON
+• Amount: Informed by our staff
 
 ⚠️ *Only USDT TRC20 accepted!*
 
@@ -84,22 +84,7 @@ For follow-up: {bot_username}""",
 
 💰 Payment: USDT TRC20 only""",
         'help': f"🤖 *{BOT_USERNAME}*\n\n/start - Make an order\n/help - Help\n/services - View services\n\n🏪 Rick Shop - Premium Quality",
-        'custom_service': "📝 *DESCRIBE YOUR CUSTOM SERVICE:*\n\nWhat do you need? Detail:\n• Service type\n• Quantity/volume\n• Deadline\n• Budget\n\n💰 *Conditions:* 60% upfront, 40% upon completion",
-        'order_sent': """✅ *ORDER SENT SUCCESSFULLY!*
-
-📬 Your order has been sent to our team.
-📞 We will contact you via {telegram_username} within 24 hours.
-
-💰 *PAYMENT:*
-• Token: USDT (TRC20)
-• Network: TRON
-• Amount: Informed by our staff
-
-⚠️ *Only USDT TRC20 accepted!*
-
-🛡️ *RICK SHOP - PREMIUM QUALITY*
-
-For a new order: {bot_username}"""
+        'custom_service': "📝 *DESCRIBE YOUR CUSTOM SERVICE:*\n\nWhat do you need? Detail:\n• Service type\n• Quantity/volume\n• Deadline\n• Budget\n\n💰 *Conditions:* 60% upfront, 40% upon completion"
     },
     'portugues': {
         'welcome': f"🌐 *BEM-VINDO AO {BOT_USERNAME}*\n\nEscolha seu idioma:",
@@ -124,7 +109,7 @@ Escolha um serviço:
 💰 *Pagamento:* Apenas USDT TRC20
 ⚡ *Entrega:* Rápida após pagamento
 🛡️ *Qualidade:* Premium garantida""",
-        'order_confirmed': """✅ *PEDIDO ENVIADO COM SUCESSO!*
+        'order_confirmed': """✅ *PEDIDO CONFIRMADO COM SUCESSO!*
 
 📬 Seu pedido foi enviado para nossa equipe.
 📞 Entraremos em contato via {telegram_username} em até 24h.
@@ -164,22 +149,7 @@ Para acompanhamento: {bot_username}""",
 
 💰 Pagamento: Apenas USDT TRC20""",
         'help': f"🤖 *{BOT_USERNAME}*\n\n/start - Fazer pedido\n/help - Ajuda\n/services - Ver serviços\n\n🏪 Rick Shop - Qualidade Premium",
-        'custom_service': "📝 *DESCREVA SEU SERVIÇO PERSONALIZADO:*\n\nO que você precisa? Detalhe:\n• Tipo de serviço\n• Quantidade/volume\n• Prazo\n• Orçamento\n\n💰 *Condições:* 60% antecipado, 40% conclusão",
-        'order_sent': """✅ *PEDIDO ENVIADO COM SUCESSO!*
-
-📬 Seu pedido foi enviado para nossa equipe.
-📞 Entraremos em contato via {telegram_username} em até 24h.
-
-💰 *PAGAMENTO:*
-• Token: USDT (TRC20)
-• Rede: TRON
-• Valor: Informado pelo atendente
-
-⚠️ *Apenas USDT TRC20 aceito!*
-
-🛡️ *RICK SHOP - QUALIDADE PREMIUM*
-
-Para novo pedido: {bot_username}"""
+        'custom_service': "📝 *DESCREVA SEU SERVIÇO PERSONALIZADO:*\n\nO que você precisa? Detalhe:\n• Tipo de serviço\n• Quantidade/volume\n• Prazo\n• Orçamento\n\n💰 *Condições:* 60% antecipado, 40% conclusão"
     },
     'chinese': {
         'welcome': f"🌐 *欢迎来到 {BOT_USERNAME}*\n\n选择您的语言:",
@@ -204,7 +174,7 @@ Para novo pedido: {bot_username}"""
 💰 *付款:* 仅限 USDT TRC20
 ⚡ *交付:* 付款后快速
 🛡️ *质量:* 优质保证""",
-        'order_confirmed': """✅ *订单发送成功!*
+        'order_confirmed': """✅ *订单确认成功!*
 
 📬 您的订单已发送给我们的团队。
 📞 我们将在24小时内通过 {telegram_username} 联系您。
@@ -244,22 +214,7 @@ Para novo pedido: {bot_username}"""
 
 💰 付款: 仅限 USDT TRC20""",
         'help': f"🤖 *{BOT_USERNAME}*\n\n/start - 下订单\n/help - 帮助\n/services - 查看服务\n\n🏪 Rick Shop - 优质品质",
-        'custom_service': "📝 *描述您的定制服务:*\n\n您需要什么? 详细说明:\n• 服务类型\n• 数量/容量\n• 截止日期\n• 预算\n\n💰 *条件:* 60% 预付款, 40% 完成时付款",
-        'order_sent': """✅ *订单发送成功!*
-
-📬 您的订单已发送给我们的团队。
-📞 我们将在24小时内通过 {telegram_username} 联系您。
-
-💰 *付款:*
-• 代币: USDT (TRC20)
-• 网络: TRON
-• 金额: 由客服告知
-
-⚠️ *仅接受 USDT TRC20!*
-
-🛡️ *RICK SHOP - 优质品质*
-
-新订单: {bot_username}"""
+        'custom_service': "📝 *描述您的定制服务:*\n\n您需要什么? 详细说明:\n• 服务类型\n• 数量/容量\n• 截止日期\n• 预算\n\n💰 *条件:* 60% 预付款, 40% 完成时付款"
     }
 }
 
@@ -267,7 +222,7 @@ Para novo pedido: {bot_username}"""
 SERVICES = {
     'english': {
         1: "📋 Brazilian Phone Lists",
-        2: "📞 Numbers for SMS/Social Media", 
+        2: "📞 Numbers for SMS/Social Media",
         3: "📱 Instagram Accounts",
         4: "👍 TikTok Likes and Views",
         5: "🎨 Professional Profile Setup",
@@ -300,148 +255,39 @@ SERVICES = {
     }
 }
 
-# ========== PREÇOS COMPLETOS ==========
 PRICES = {
     'english': {
-        1: """💰 *Price:* Starting from $200
-⚡ *Delivery:* 24 hours
-📊 *Database:* 100K+ Brazilian numbers
-🔄 *Update:* Monthly refreshed
-🎯 *Target:* Specific states/cities available""",
-        2: """💰 *Price:* $15-30 per number
-⚡ *Activation:* Immediate
-📱 *Type:* SMS/WhatsApp/Telegram verification
-🔒 *Guarantee:* Working numbers
-🔄 *Replacement:* 48h if not working""",
-        3: """💰 *Price:* $50 - $2,500
-⚡ *Delivery:* 1-2 hours
-👥 *Type:* Old accounts, business, verified
-📈 *Followers:* 1K - 100K options
-🔒 *Security:* With email recovery""",
-        4: """💰 *Price:* $10 - $50
-🚀 *Results:* 24-48 hours
-👍 *Likes:* 1K - 100K packages
-👁️ *Views:* 10K - 1M packages
-📈 *Real:* High retention rate""",
-        5: """💰 *Price:* $300 - $800
-⏱️ *Deadline:* 3-5 days
-🎨 *Includes:* Logo, banner, bio optimization
-📱 *Platforms:* Instagram, LinkedIn, Twitter
-📊 *Analytics:* Monthly report""",
-        6: """💰 *Subscription:* $1,500/month
-📊 *Data:* Millions of Brazilian records
-🔍 *Filters:* Age, location, income
-📈 *Real-time:* Updated daily
-💼 *Business:* Companies database""",
-        7: """💰 *Price:* $200 - $800
-🌎 *Countries:* +50 countries
-📋 *Types:* Phone, email, business
-⚡ *Delivery:* 48-72 hours
-🎯 *Specific:* Per country/region""",
-        8: """💰 *Price:* $500 - $1,500
-📅 *Deadline:* 5-10 days
-📋 *Includes:* Business plan, marketing strategy
-💼 *Industries:* Various sectors
-📈 *Feasibility:* Market analysis""",
-        9: """💰 *Payment:* 60% upfront + 40% upon completion
-💬 *Describe your need*
-⚡ *Quote:* Within 24 hours
-🛠️ *Development:* Custom solutions
-🔒 *Confidentiality:* 100% guaranteed"""
+        1: "💰 *Price:* From $200\n⚡ *Delivery:* 24h",
+        2: "💰 *Price:* $15-30/number\n⚡ *Activation:* Immediate",
+        3: "💰 *Price:* $50-2.500\n⚡ *Delivery:* 1-2 hours",
+        4: "💰 *Price:* $10-50\n🚀 *Results:* 24-48h",
+        5: "💰 *Price:* $300-800\n⏱️ *Deadline:* 3-5 days",
+        6: "💰 *Subscription:* $1.500/month\n📊 *Data:* Millions",
+        7: "💰 *Price:* $200-800\n🌎 *Countries:* +50",
+        8: "💰 *Price:* $500-1.500\n📅 *Deadline:* 5-10 days",
+        9: "💰 *Payment:* 60% upfront + 40% completion\n💬 *Describe your need*"
     },
     'portugues': {
-        1: """💰 *Preço:* A partir de $200
-⚡ *Entrega:* 24 horas
-📊 *Database:* 100K+ números brasileiros
-🔄 *Atualização:* Mensalmente renovada
-🎯 *Segmentação:* Estados/cidades específicas disponíveis""",
-        2: """💰 *Preço:* $15-30 por número
-⚡ *Ativação:* Imediata
-📱 *Tipo:* Verificação SMS/WhatsApp/Telegram
-🔒 *Garantia:* Números funcionando
-🔄 *Substituição:* 48h se não funcionar""",
-        3: """💰 *Preço:* $50 - $2.500
-⚡ *Entrega:* 1-2 horas
-👥 *Tipo:* Contas antigas, business, verificadas
-📈 *Seguidores:* Opções de 1K - 100K
-🔒 *Segurança:* Com email de recuperação""",
-        4: """💰 *Preço:* $10 - $50
-🚀 *Resultados:* 24-48 horas
-👍 *Curtidas:* Pacotes de 1K - 100K
-👁️ *Visualizações:* Pacotes de 10K - 1M
-📈 *Reais:* Alta taxa de retenção""",
-        5: """💰 *Preço:* $300 - $800
-⏱️ *Prazo:* 3-5 dias
-🎨 *Inclui:* Logo, banner, otimização de bio
-📱 *Plataformas:* Instagram, LinkedIn, Twitter
-📊 *Analytics:* Relatório mensal""",
-        6: """💰 *Assinatura:* $1.500/mês
-📊 *Dados:* Milhões de registros brasileiros
-🔍 *Filtros:* Idade, localização, renda
-📈 *Tempo real:* Atualizado diariamente
-💼 *Empresas:* Database de companhias""",
-        7: """💰 *Preço:* $200 - $800
-🌎 *Países:* +50 países
-📋 *Tipos:* Telefone, email, negócios
-⚡ *Entrega:* 48-72 horas
-🎯 *Específico:* Por país/região""",
-        8: """💰 *Preço:* $500 - $1.500
-📅 *Prazo:* 5-10 dias
-📋 *Inclui:* Plano de negócios, estratégia de marketing
-💼 *Indústrias:* Vários setores
-📈 *Viabilidade:* Análise de mercado""",
-        9: """💰 *Pagamento:* 60% antecipado + 40% conclusão
-💬 *Descreva sua necessidade*
-⚡ *Orçamento:* Em até 24 horas
-🛠️ *Desenvolvimento:* Soluções personalizadas
-🔒 *Confidencialidade:* 100% garantida"""
+        1: "💰 *Preço:* A partir de $200\n⚡ *Entrega:* 24h",
+        2: "💰 *Preço:* $15-30/número\n⚡ *Ativação:* Imediata",
+        3: "💰 *Preço:* $50-2.500\n⚡ *Entrega:* 1-2 horas",
+        4: "💰 *Preço:* $10-50\n🚀 *Resultados:* 24-48h",
+        5: "💰 *Preço:* $300-800\n⏱️ *Prazo:* 3-5 dias",
+        6: "💰 *Assinatura:* $1.500/mês\n📊 *Dados:* Milhões",
+        7: "💰 *Preço:* $200-800\n🌎 *Países:* +50",
+        8: "💰 *Preço:* $500-1.500\n📅 *Prazo:* 5-10 dias",
+        9: "💰 *Pagamento:* 60% antecipado + 40% conclusão\n💬 *Descreva sua necessidade*"
     },
     'chinese': {
-        1: """💰 *价格:* 从 $200 起
-⚡ *交付:* 24 小时
-📊 *数据库:* 100K+ 巴西号码
-🔄 *更新:* 每月刷新
-🎯 *目标:* 可用特定州/城市""",
-        2: """💰 *价格:* $15-30/号码
-⚡ *激活:* 立即
-📱 *类型:* SMS/WhatsApp/Telegram 验证
-🔒 *保证:* 工作号码
-🔄 *更换:* 48小时内如果不工作""",
-        3: """💰 *价格:* $50 - $2,500
-⚡ *交付:* 1-2 小时
-👥 *类型:* 旧账户, 商业, 已验证
-📈 *粉丝:* 1K - 100K 选项
-🔒 *安全:* 带邮箱恢复""",
-        4: """💰 *价格:* $10 - $50
-🚀 *结果:* 24-48 小时
-👍 *点赞:* 1K - 100K 套餐
-👁️ *观看:* 10K - 1M 套餐
-📈 *真实:* 高保留率""",
-        5: """💰 *价格:* $300 - $800
-⏱️ *期限:* 3-5 天
-🎨 *包括:* 标志, 横幅, 简介优化
-📱 *平台:* Instagram, LinkedIn, Twitter
-📊 *分析:* 月度报告""",
-        6: """💰 *订阅:* $1,500/月
-📊 *数据:* 数百万巴西记录
-🔍 *过滤器:* 年龄, 位置, 收入
-📈 *实时:* 每日更新
-💼 *商业:* 公司数据库""",
-        7: """💰 *价格:* $200 - $800
-🌎 *国家:* +50 国家
-📋 *类型:* 电话, 电子邮件, 商业
-⚡ *交付:* 48-72 小时
-🎯 *特定:* 按国家/地区""",
-        8: """💰 *价格:* $500 - $1,500
-📅 *期限:* 5-10 天
-📋 *包括:* 商业计划, 营销策略
-💼 *行业:* 各种领域
-📈 *可行性:* 市场分析""",
-        9: """💰 *付款:* 60% 预付款 + 40% 完成时付款
-💬 *描述您的需求*
-⚡ *报价:* 24小时内
-🛠️ *开发:* 定制解决方案
-🔒 *保密性:* 100% 保证"""
+        1: "💰 *价格:* 从 $200 起\n⚡ *交付:* 24小时",
+        2: "💰 *价格:* $15-30/号码\n⚡ *激活:* 立即",
+        3: "💰 *价格:* $50-2.500\n⚡ *交付:* 1-2 小时",
+        4: "💰 *价格:* $10-50\n🚀 *结果:* 24-48小时",
+        5: "💰 *价格:* $300-800\n⏱️ *期限:* 3-5 天",
+        6: "💰 *订阅:* $1.500/月\n📊 *数据:* 数百万",
+        7: "💰 *价格:* $200-800\n🌎 *国家:* +50",
+        8: "💰 *价格:* $500-1.500\n📅 *期限:* 5-10 天",
+        9: "💰 *付款:* 60% 预付款 + 40% 完成时付款\n💬 *描述您的需求*"
     }
 }
 
@@ -531,7 +377,7 @@ async def choose_service(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     ]]
     
     await query.edit_message_text(
-        f"*{service_text}*\n\n{price_text}",
+        f"{service_text}\n\n{price_text}",
         reply_markup=InlineKeyboardMarkup(keyboard),
         parse_mode='Markdown'
     )
@@ -589,13 +435,7 @@ async def get_observations(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     service = user_data[user_id]['service']
     username = user_data[user_id]['telegram_username']
     
-    # Definir texto para observações vazias
-    if language == 'english':
-        observations_text = observations or 'None'
-    elif language == 'portugues':
-        observations_text = observations or 'Nenhuma'
-    else:  # chinese
-        observations_text = observations or '无'
+    observations_text = observations or ('None' if language == 'english' else 'Nenhuma' if language == 'portugues' else '无')
     
     keyboard = [[
         InlineKeyboardButton("✅ CONFIRM ORDER", callback_data="confirm_order")
@@ -629,20 +469,12 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
     
     # Enviar para grupo
     try:
-        # Definir texto para observações vazias no grupo
-        if language == 'english':
-            obs_text = user_info.get('observations', 'None')
-        elif language == 'portugues':
-            obs_text = user_info.get('observations', 'Nenhuma')
-        else:  # chinese
-            obs_text = user_info.get('observations', '无')
-        
         group_message = f"""📋 *NEW ORDER - RICK SHOP*
 
 👤 *Customer:*
 • Telegram: {user_info.get('telegram_username', 'N/A')}
 • Service: {user_info.get('service', 'N/A')}
-• Observations: {obs_text}
+• Observations: {user_info.get('observations', 'None')}
 • Language: {language.upper()}
 • Date: {datetime.now().strftime("%d/%m/%Y %H:%M")}
 
@@ -656,23 +488,30 @@ async def confirm_order(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
         
         logger.info(f"✅ Order sent to group {ORDER_GROUP_ID}")
         
-        # Mensagem final para cliente - CORRIGIDA AQUI
+        # Mensagem final para cliente com a mensagem solicitada
         await query.edit_message_text(
-            texts['order_sent'].format(
-                telegram_username=user_info.get('telegram_username', ''),
-                bot_username=BOT_USERNAME
-            ),
+            f"""✅ *ORDER SENT SUCCESSFULLY!*
+
+📬 Your order has been sent to our team.
+📞 We will contact you via {user_info.get('telegram_username')} within 24 hours.
+
+💰 *PAYMENT INSTRUCTIONS:*
+• Token: USDT (TRC20)
+• Network: TRON network
+• Amount: Will be informed by our team
+
+⚠️ *Only USDT TRC20 accepted!*
+
+🛡️ *RICK SHOP - PREMIUM QUALITY*
+
+For a new order: {BOT_USERNAME}""",
             parse_mode='Markdown'
         )
         
     except Exception as e:
-        logger.error(f"❌ Error sending to group: {e}")
-        # Se falhar ao enviar para o grupo, ainda mostrar mensagem ao cliente
+        logger.error(f"❌ Error: {e}")
         await query.edit_message_text(
-            texts['order_sent'].format(
-                telegram_username=user_info.get('telegram_username', ''),
-                bot_username=BOT_USERNAME
-            ),
+            texts['order_received'].format(bot_username=BOT_USERNAME),
             parse_mode='Markdown'
         )
     
@@ -748,19 +587,6 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     
     return ConversationHandler.END
 
-# ========== COMANDOS ADICIONAIS ==========
-async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = str(update.effective_user.id)
-    language = user_data.get(user_id, {}).get('language', 'english')
-    texts = TEXTS[language]
-    await update.message.reply_text(texts['help'], parse_mode='Markdown')
-
-async def services_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = str(update.effective_user.id)
-    language = user_data.get(user_id, {}).get('language', 'english')
-    texts = TEXTS[language]
-    await update.message.reply_text(texts['services_list'], parse_mode='Markdown')
-
 # ========== MAIN COM WEBHOOK CORRIGIDO ==========
 def main():
     """Função principal - usa WEBHOOK com pacote correto."""
@@ -789,7 +615,19 @@ def main():
     
     app.add_handler(conv_handler)
     
-    # Adicionar handlers para comandos extras
+    # Comandos extras
+    async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        user_id = str(update.effective_user.id)
+        language = user_data.get(user_id, {}).get('language', 'english')
+        texts = TEXTS[language]
+        await update.message.reply_text(texts['help'], parse_mode='Markdown')
+    
+    async def services_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        user_id = str(update.effective_user.id)
+        language = user_data.get(user_id, {}).get('language', 'english')
+        texts = TEXTS[language]
+        await update.message.reply_text(texts['services_list'], parse_mode='Markdown')
+    
     app.add_handler(CommandHandler("help", help_cmd))
     app.add_handler(CommandHandler("services", services_cmd))
     
@@ -811,4 +649,11 @@ def main():
     app.run_webhook(
         listen="0.0.0.0",
         port=PORT,
-        url_path=
+        url_path=TOKEN,
+        webhook_url=webhook_url,
+        drop_pending_updates=True,
+        secret_token='RICK_SHOP_BOT_SECRET'
+    )
+
+if __name__ == '__main__':
+    main()
