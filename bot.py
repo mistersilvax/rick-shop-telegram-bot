@@ -807,8 +807,6 @@ def main():
     webhook_url = f"{WEBHOOK_URL}/{TOKEN}"
     logger.info(f"🔗 Webhook URL: {webhook_url}")
     
-    # Configurar webhook
+    # Configurar webhook - AGORA COMPLETO
     app.run_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        url_path=
+        listen="0.0
